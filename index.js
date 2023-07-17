@@ -1,145 +1,119 @@
-//вызываем пустой объект
-const obj1 = {};
+//Task1 приветствие пользователя
+// const user1 = {
+//     firstName: 'Brad',
+//     lastName: 'Pitt',
+//     age: 63,
+//     isMale: true,
+// };
+
+// const user2 = {
+//     firstName: 'Tom',
+//     lastName: 'Rot',
+//     age: 63,
+//     isMale: true,
+// };
+
+// function hiUser(objUser){ //objUser = user1
+//     objUser.age = 10; //перезаписали user1 и user2 тк обращались в функции к user
+//     return `Hi, ${objUser.firstName} ${objUser.lastName}`;
+// }
+
+// console.log(hiUser(user1))
+// console.log(hiUser(user2))
 
 
-// const obj2 и const obj3, одно и тоже, вызываем объект c помощью встроенных в js объектов
-const obj2 = Object();
-const obj3 = new Object();
+//Task2 сравнение объектов и копирование
+// const pr1 = 3;
+// const pr2 = 3;
 
-//создание объекта
-const cat = {
-    name: 'Ray', 
-    isMale: true,
-    age: 1,
-    isSleeping: false,
-    talk: function(){
-        return 'meow';
-    }
+// console.log(pr1 === pr2); //true
+
+// const obj1 = {
+//     prop: 1
+// }
+
+// const copyObj = obj1;
+
+// const obj2 = {
+//     prop: 1
+// }
+
+// console.log(obj1 === obj2); //false тк сравнивается адрес объектов а он разный
+
+// console.log(obj1.prop1 === obj2.prop1); //true тк сравниваем свойства а они одинаковые
+
+// console.log(obj1 === copyObj); //true когда копируем переменную то он копирует адрес или ссылку или ярлык, еще один способ copyObj обратиться к obj1
+
+
+
+//вычисляемые свойства
+// const user1 = {
+//     firstName: 'Brad',
+//     lastName: 'Pitt',
+//     age: 63,
+//     'is Male': true,
+//     123: 456,
+//     0: 'zero',
+// };
+
+// const nameUserProp = prompt('enter name');
+// user1[nameUserProp] = 'one two';
+// user1.prop1 = 45;
+// user1['two words'] = 'one two'; //добавляем свойства название которого состоит из 2 слов 
+// user1[48] = null; //добавляем свойства название которого состоит с цифр
+
+// // const nameProp = 'is male';
+// // console.log(user1[nameProp]); //true [] вычисляют значение и подставляют его
+// // console.log(user1['is male']); //true
+
+// // const number = 123;
+// // console.log(user1[number]); //456
+// // console.log(user1[123]);  //456
+
+// // console.log(user1.firstName);
+// // console.log(user1[0]); //zero
+// // console.log(user1['0']); //zero
+// // console.log(user1[123]); //456
+// // console.log(user1['is male']); //true
+
+
+//функция которая создает объект семья, ключами будут имена, значение - член семьи
+// function createObjFamily(members = 3){
+//     const family = {};
+//     for(let i=0; i<members; i++){вмест
+//         const nameMember = prompt('Enter name member');
+//         const statusMember = prompt('Enter status member');
+//         family[nameMember] = statusMember;
+//     }
+//     return family;
+// }
+
+// const userFamily = createObjFamily();
+// console.log(userFamily);
+
+// оператор in 
+const year = { 
+    winter: 'cold',
+    spring: 'not cold',
+    summer: 'hot',
+    autumn: 'not hot',
 };
-console.log(cat.name);
-console.log(cat.age);
 
-console.log('cat', cat);
+const curSezon = 'winter';
+// console.log(curSezon in year); //true тк подставляется значение summer
 
-cat.age++;
-console.log(cat.age);
+// console.log('winter'in year); //true
+// console.log(winter in year); //ошибка не правильный ввод 
 
-delete cat.isSleeping;
-console.log('cat', cat);
+if(curSezon in year){
+    console.log(year[curSezon]);
+}else{
+    console.log('error');
+}                         //cold //проверяем существует ли свойство
 
-cat.color = 'wide';
 
-//создать 2 кота, со свойствами
-const secondCat = {
-    name: 'Lala', 
-    isFemale: true,
-    age: 3,
-    isSleeping: false,
-    color: 'white',
-    talk: function(){
-        return 'meow meow';
-    }
-};
-
-//создать объект кнопка, литерально, тот есть в ручную
-const button1 = {
-    content: 'submit',
-    autoFocus: false,
-    backColor: 'red',
-    click: function(){
-        return this.content;
-    },
-};
-// button1.name = 'send';
-
-const button2 = {
-    content: 'reset',
-    autoFocus: true,
-    backColor: 'blue',
-    click: function(){
-        return this.content;
-    },
-};
-const button3 = {
-    content: 'subscribe',
-    autoFocus: true,
-    backColor: 'pink',
-    click: function(){
-        return this.content;
-    },
-};
-
-//функция конструктор
-function Cat(nameValue, isMale, age, isSleeping, color){
-    this.name = nameValue;
-    this.isMale = isMale;
-    this.age = age;
-    this.isSleeping = isSleeping;
-    this.color = color;
-    this.talk = function(){
-        return 'meow';
-    }
+//цикл свойств определенного объекта, for in
+for(const key in year){   //key = 'winter'
+    console.log(`${key} : ${year[key]}`) //выводит все свойства и значение объекта year, вместо key может быть любое название 
 }
 
-const cat1 = new Cat('Ray', true, 1, false, 'wide');
-const cat2 = new Cat('Pushok', true, 3, true, 'gray');
-
-//функция констктор для кнопки
-function Button(content, autoFocus, backColor){
-    this.content = content;
-    this.autoFocus = autoFocus;
-    this.backColor = backColor;
-    this.borderStyle = 'solid'; //значения для всех
-    this.amoutAngle = 4; //значения для всех
-    this.click = function(){
-        return this.content;
-    }
-}
-const but1 = new Button('subscribe', true, 'pink');
-const but2 = new Button('reset', true, 'red');
-
-but1.borderStyle = ''; //перезаписываем значение для but1
-but2.amoutAngle = 0; //перезаписываем значение для but2
-
-//функция констуктор для пользователя
-function User(firstName, lastName, age){
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.fullName = function(){
-        return this.firstName + ' ' + this.lastName;
-    }
-}
-const user1 = new User('Maks', 'Pitt', 30);
-const user2 = new User('Ann', 'Pit', 27);
-const user3 = new User('Nina', 'Jon', 9);
-
-console.log(user1.fullName());
-console.log(user2.fullName());
-console.log(user3.fullName());
-
-
-//функция конструктор для страны
-function Country(name, population, area){
-    this.name = name;
-    this.population = population;
-    this.area = area;
-    this.getInfo = function(){
-        // return this.name + ' ' + 'population' + ':' + this.population + ' ' + 'area' + ':' + this.area;
-        return `               //форматирование с помощью обратных скобк
-        ${this.name}
-        population:${this.population}
-        area:${this.area}
-        `;
-    };
-    this.getDensity = function(){
-        return this.population / this.area;
-    };
-}
-
-const county1 = new Country('USA', 336.700, 65.098);
-const county2 = new Country('Ukraine', 123.800, 42.550);
-const county3 = new Country('Romania', 67.800, 12.590);
-
-console.log(county1.getInfo());
-console.log(county1.getDensity());
