@@ -1,104 +1,81 @@
-//Task1 создать функцию конструктор для пользователя, написать в свойствах имя и возрас, фамилию. Метод вернуть полное имя. Метод вынести в прототип
+// //перезаписываем для объекта
+// const object = {pr1: 12, pr2: 23};
 
-// function User(firstName, lastName, age){
-//     this.firstName = firstName;
-//     this.lastName = lastName;
-//     this.age = age;
+// function f1(obj) {
+//     return (obj.key = 'qwerty');
 // }
 
-// function PrototypeUser(){
-//     this.fullName = function(){
-//         return this.firstName + ' ' + this.lastName;
-//     };
-//     this.toString = function(){
-//         return `Info: name - ${this.firstName}`; //переписываем метод toString 
-//     };
+// f1(object);
+// console.log(object);
+
+
+// //перезаписываем для массива
+// const obj2 = [12, 15, 4];
+
+// function f1(obj){
+//     return obj[0] = 888;
 // }
 
-// User.prototype = new PrototypeUser();
-
-// const user1 = new User('Maks', 'Pitt', 30);
-// const user2 = new User('Ann', 'Pit', 27);
-
-// console.log(user1.fullName());
-// console.log(user1.toString()); //метод объекта можно посмотреть через alert
-// alert(user1);
-// alert(user2);
+// f1(obj2);
+// console.log(obj2);
 
 
-//наследование литерально
-// const man = {
-//     fullName: function(){
-//         return this.firstName;
-//     },
-//     speak: function(word){
-//         return 'man speak: ' +word;
-//     }
-// }
+//массив
+// const arr = [12,15,4];
 
-// const user1 = {
-//     firstName: 'Brad'
-// }
+// alert(arr);
 
-// user1.__proto__ = man;
+// //конкатенация concat
+// const array1 = [{prop:12} ,{name:'qwe'} ,{}];
+// const array2 = ['d' ,'e' ,'f'];
+// const array3 = array2.concat([4,5], 789, array2);
+// const array4 = array2;
 
-// console.log(user1)
-// console.log(user1.fullName())
+// // console.log(array3 === array2); //false, shelly copy
+// // console.log(array2 === array4); //true, copy address
+// array3[0] = 'w';
+// array4[0] = 'q';
+
+// console.log(array3);
+// const array5 = array1.concat();
+// console.log(array5);
+// console.log(array1 === array5); //false, new address
+
+// console.log(array5[0].prop); //12, обращаемся к массиву потом к свойству объекта
+// console.log(array5[0]['prop']); //или так
+
+// array5[1].name = 'Brad';
+// console.log(array5[1].name); //Brad
+// console.log(array1[1].name); //Brad, изменилось и там тк была поверхнастная копия const array5 = array1.concat();
 
 
-//Homework, Task1
-//Cтворіть функцію конструктор Продукт з властивостями: назва(рядок), ціна(число), кількість(число - залишок на складі), знижка = 0 Cтворіть функцію конструктор прототипу Продукту з функціоналом:
-//showInfo() - повертає рядок з усіма данними
-//**setSaleToPrice(value=0) - встановлює знижку і повертає нову ціну товару, з урахуванням зніжки
-//**buyAmountProduct(amountValue) - повертає загальну вартість, якщо є достатня кількість, якщо не має повертаєте - null
-//Не забути поєднати Продукт і його прототип! Створіть хоча б один продукт і викличте для нього усі методи.
+//создаем пустой массив c 5 элементами, fill
+const arr = new Array(5).fill({name:'noname'});
+// arr.fill() //заполняет все элементы массива одним значением
+console.log(arr);
 
-function Product(name, price, quantity, discount = 0){
-    this.name = name;
-    this.price = price;
-    this.quantity = quantity;
-    this.discount = discount; // %
-}
+//создаем массив, проверяем если ли 'key = 3' в массиве, indexOf, includes
+const arr2 = [10,2,5,6,7,88];
+const key = 5;
+startIndex = 1;
 
-function PrototypeInfoProduct(){
-    this.showInfo = function(){
-        return `
-        ${this.name}
-        price:${this.price}
-        quantity:${this.quantity}
-        discount:${this.discount}
-        `;
-    }
-    this.getPriceWithDiscount = function(){
-        return this.price - this.price * this.discount / 100;
-    }
-    this.setDiscount = function(value = 0){
-        this.discount = value;
-        return this.getPriceWithDiscount();
-    }
-    
-    // this.validateNumber = function(value){
-    //     return !Number.isNaN(Number(value)); //проверка на число
-    // }
+console.log(arr2);
+console.log(arr2.indexOf(key)) //2, возвращает значение индекс где находится key
+console.log(arr2.indexOf(key, startIndex)) //2, startIndex указал откуда начинать поиск key
 
-    this.buyAmountProduct = function(amountValue){
-        if(amountValue > this.quantity) {
-            return null;
-        }
+console.log(arr2.includes(key)) //true, выводит значение true или false если значение есть в массиве или нет
+console.log(arr2.includes(key, startIndex)) //startIndex - откуда начинать поиск
 
-        this.quantity -= amountValue;
+//pop, shift, unshift
+arr2.pop(); //удаляем последний элемент массива
 
-        return this.getPriceWithDiscount() * amountValue;
-    } 
-}
+arr2.shift(); //удаляет первый элемент массива
 
-Product.prototype = new PrototypeInfoProduct();
+arr2.unshift(76); //добавляем 1 элемент в начало массива
 
-const apple = new Product('Apple', 5, 10);
+//reverse
+const arr3 = arr2.concat().reverse(); //переворачиваем и создаем копию массива arr2 - остается как был, а arr3 - меняет элементы первый теперь последний, а последний - первый
+console.log(arr2);
+console.log(arr3);
 
-console.log(apple.showInfo());
-console.log(apple.setDiscount(30)); //3.5
-console.log(apple.showInfo());
-console.log(apple.buyAmountProduct(20)); //null
-console.log(apple.buyAmountProduct(5)); //17.5
-console.log(apple.showInfo());
+
