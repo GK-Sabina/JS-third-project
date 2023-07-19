@@ -76,6 +76,11 @@ function PrototypeInfoProduct(){
         this.discount = value;
         return this.getPriceWithDiscount();
     }
+    
+    // this.validateNumber = function(value){
+    //     return !Number.isNaN(Number(value)); //проверка на число
+    // }
+
     this.buyAmountProduct = function(amountValue){
         if(amountValue > this.quantity) {
             return null;
