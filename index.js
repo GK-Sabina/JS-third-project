@@ -1,75 +1,158 @@
-//мутация данных
-// const arr1 = new Array(7, 4, 5);
-// arr1[0] = 5555;
-// arr1[0] = null;
-// arr1[6] = 55;
+// //hight order function 
+// /**
+//  * 
+//  * @param {function} howSay 
+//  * @param {string} whatSay 
+//  */
+// function saySomething(howSay, whatSay = 'hi') {
+//     howSay(whatSay);
+// }
+// saySomething(alert, 'hello')
 
-// const arr2 = new Array(73, 44, 55);
+//forEach
+// const arr1 = [1,2,3,4,5];
 
-// let arrCurrent = Math.random()>0.5 ? arr1 : arr2;
-// arrCurrent[1] = 1000;
-// console.log(arrCurrent.indexOf(5));
-
-// if(Math.random()>0.5){
-//     console.log(arr1.indexOf(5));
-// }else{
-//     console.log(arr2.indexOf(5))
+// function getSquare(value){
+//     console.log(value * value);
+//     return value * value;
+// }
+// function getSum(value){
+//     console.log(value + value);
+//     return value + value;
 // }
 
-//slice
-// const arr1 = [1,2,3,4,5,6,7,8,9];
+// // for(let index = 0; index < arr1.length; index++){
+// //     getSquare(arr1[index]);
+// // }
 
-// const sliceArr1 = arr1.slice(); //slice возвращает поверхностную копию массива
-// const sliceArr2 = arr1.slice(2); //срезали часть с 0 до 2
-// const sliceArr3 = arr1.slice(2, 7); //срезали с 2 до 7
+// // arr1.forEach(getSquare); //перебираем массив и применяем свойство function getSquare
 
-// console.log(arr1); //[1,2,3,4,5,6,7,8,9];
-// console.log(sliceArr1); //[1,2,3,4,5,6,7,8,9];
-// console.log(sliceArr2);//[3,4,5,6,7,8,9];
+// //приминяем forEach для const myArr1 = new MyArray()
+// arr1.forEach(function(currentElement){
+//     console.log(currentElement)
+// });
 
-//splice
-// const arr2 = [1,2,3,4,5,6,7,8,9];
+// arr1.forEach(getSum)
 
-// const start = 3;
-// const deleteCount = 2;
+// const myArr1 = new MyArray(4, 8, 6);
+// myArr1.forEach(getSquare);
 
-// // const spliceArr1 = arr2.splice(start); //разделяет массив начиная с 3 тк start=3
-// // const spliceArr1 = arr2.splice(start, deleteCount); //удалили 2 и 3 индекс
-// const spliceArr1 = arr2.splice(start, deleteCount, '+') // удалили 2 и 3 индекс и вставили туда +
+// myArr1.forEach(function(currentElement){
+//     console.log(currentElement)
+// });
 
-// console.log(arr2); 
-// console.log(spliceArr1); 
+//forEach practic, делаем подписку всем пользователям
+// const users = [{name: 'Tom'}, {name: 'Brad'}, {name: 'Rob'} ];
 
-//сделать так чтобы было:
-//Task1 1,2,3  
-//Task2  1,4,5   
-//Task3  1, 'a', 'b, 5
+// users.forEach(function(user){
+//     user.isSubscribe = true;
+// })
 
-const arr1 = [1,2,3,4,5];
+//every
+//some
+// const arr1 = [21, 4, 8];
 
-//Task 1 
-// const start = 3;
-// const spliceArr1 = arr1.splice(start);
-// console.log(arr1); //1, 2, 3
-// console.log(spliceArr1); 
+// const isEven = function(number){
+//     return number % 2 === 0;
+// };
+// console.log(arr1.some(isEven)); //true, нужно чтобы хотя бы одно подошло и true вернется 
+// console.log(arr1.every(isEven)); //false, нужно чтобы все подошли и тогда вернется true
 
-//Task 2
-// const start = 1;
-// const deleteCount = 2;
-// const spliceArr1 = arr1.splice(start, deleteCount);
-// console.log(arr1); //1, 4, 5
-// console.log(spliceArr1); //2, 3
+//filter
+// const arr2 = [21, 4, 83];
 
-//Task 3
-// const start = 1;
-// const deleteCount = 3;
-// const spliceArr1 = arr1.splice(start, deleteCount, 'a', 'b')
-// console.log(arr1); //1, 'a', 'b', 5
-// console.log(spliceArr1); //2, 3, 4
+// const isEven = function(number){
+//     return number % 2 === 0;
+// };
 
-//join
-const arr2 = [1,2,3,4,5];
+// const arrEven = arr2.filter(isEven);
 
-const strArray1 = arr2.join(':'); //переобразовываем массив 
+// console.log(arr2);
+// console.log(arrEven); //4 тк к условию подошел только этот элемент
 
-console.log(strArray1) //1:2:3:4:5
+//map
+// const arr2 = [21, 4, 83];
+
+// const getSquare = function(number){
+//         return number * number;
+//     }
+
+// const arrNew = arr2.map(getSquare);
+//  console.log(arrNew); //[441, 16, 6889] создает новый массив
+
+// const arrNew2 = arr2.map(function(elem){
+//     return {prop:elem};
+// })
+
+// console.log(arrNew2);
+
+//Task map, чтобы возвращались пользователи только с подпиской
+// const users = [{name: 'Bob', age:45}, {name: 'Tom', isMale: true}, {name: 'Rob'} ];
+
+// const usersWithSubscribe = users.map(function(user){
+//     const newUser = {}
+//     // newUser.name = user.name;
+//     for (const key in user){
+//         newUser[key] = user[key]; //обращаемся ко всем свойствам объекта 
+//     }
+//     newUser.isSubscribe = false;
+//     return newUser;
+// });
+
+// console.log(users);
+// console.log(usersWithSubscribe);
+
+//sort
+// const arr1 = [21, 4, 8, 61];
+// console.log(arr1);
+
+// arr1.sort();
+// console.log(arr1); //[21, 4, 61, 8] сортирует по первому символу поэтому поменялись только 8 и 61 тк 6 меньше 8
+
+// //функция для сортировки чисел который принятый для чисел, sort
+// // function compareNumbers(a, b){
+// //     return a - b;
+// // }
+
+// //или
+
+// function compareNumbers(a, b){
+//     if(a > b){
+//         return 1; //first b then a
+//     }
+//     if(b > a){
+//         return -1; //first a then b
+//     }
+//     if(a === b){
+//         return 0;
+//     }
+// }
+
+// const arr2 = [21, 400, 8, 61];
+
+// arr2.sort(compareNumbers);
+// console.log(arr2); //[8, 21, 61, 400]
+
+//Task, sort, отсортировать по имени и возрасту
+const users = [
+{name: 'Tom', isMale: true}, 
+{name: 'Rob'}, 
+{name: 'Bob', age:45}, 
+{name: 'Fred', age: 15} 
+];
+
+const newUsersSortByName = users.sort(function(user1, user2){
+    if(user1.name > user2.name){
+         return 1; 
+        }
+        if(user1.name > user2.name){
+         return -1;
+        }
+         return 0;
+})
+
+
+const newUsersSortByAge = users.soft(function(user1, user2){
+    return user1.age - user2.age;
+})
+

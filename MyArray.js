@@ -33,6 +33,39 @@ function PrototypeMyArray(){
         
     }
 
+    this.forEach = function(callbackFn){
+        for(let index = 0; index < this.length; index++){
+            callbackFn(this[index]);
+        }
+    }
+
+    this.some = function(checkFn){
+        for(let index = 0; index < this.length; index++){
+            if(checkFn(this[index])){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    this.every = function(checkFn){
+        for(let index = 0; index < this.length; index++){
+            if(checkFn(this[index]) === false){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    this.filter = function(checkFn){
+        const result = new MyArray();
+        for(let index = 0; index < this.length; index++){
+            if(checkFn(this[index])){
+                result.push(this[index]);
+            }
+        }
+        return result;
+    }
 }
 
 // данные
@@ -52,13 +85,13 @@ MyArray.prototype = new PrototypeMyArray();
 
 
 //аргументы функции
-const arr1 = new Array(7, 4, 5);
-function f(num1, num2) {
-    console.log('num1 = ', num1); //100
-    console.log('num2 = ', num2); //5
-    console.log(arguments);
-}
-f(100, 5, 6, 8);
+// const arr1 = new Array(7, 4, 5);
+// function f(num1, num2) {
+    // console.log('num1 = ', num1); //100
+    // console.log('num2 = ', num2); //5
+    // console.log(arguments);
+// }
+// f(100, 5, 6, 8);
 
 //нужно положить аргументы в функцию
 function MyArray(){
@@ -75,5 +108,5 @@ function MyArray(){
         
     }
 
-const myArr1 = new MyArray(4, 8, 6);
-const myArr2 = new MyArray(3);
+// const myArr1 = new MyArray(4, 8, 6);
+// const myArr2 = new MyArray(3);
