@@ -134,25 +134,43 @@
 // console.log(arr2); //[8, 21, 61, 400]
 
 //Task, sort, отсортировать по имени и возрасту
-const users = [
-{name: 'Tom', isMale: true}, 
-{name: 'Rob'}, 
-{name: 'Bob', age:45}, 
-{name: 'Fred', age: 15} 
-];
+// const users = [
+// {name: 'Tom', isMale: true}, 
+// {name: 'Rob'}, 
+// {name: 'Bob', age:45}, 
+// {name: 'Fred', age: 15} 
+// ];
 
-const newUsersSortByName = users.sort(function(user1, user2){
-    if(user1.name > user2.name){
-         return 1; 
+// const newUsersSortByName = users.sort(function(user1, user2){
+//     if(user1.name > user2.name){
+//          return 1; 
+//         }
+//         if(user1.name > user2.name){
+//          return -1;
+//         }
+//          return 0;
+// })
+
+
+// const newUsersSortByAge = users.soft(function(user1, user2){
+//     return user1.age - user2.age;
+// })
+
+
+// Task Є массив [1,2,3,1,5,6,1,2,5], треба використовуючи цей масив створити новий, в якому будуть присутні тільки ті значення які повторюються.
+// Результат буде [1,2,5]
+// Якщо в джерельному масиві усі значення унікальні, то створюєте новий пустий масив.
+
+function getArrayOfNotUniqueNumbers(array) {
+    const result = [];
+
+    array.forEach(function(element) {
+        if (!result.includes(element) && array.indexOf(element) !== array.lastIndexOf(element)) {
+            result.push(element);
         }
-        if(user1.name > user2.name){
-         return -1;
-        }
-         return 0;
-})
+    });
 
+    return result;
+}
 
-const newUsersSortByAge = users.soft(function(user1, user2){
-    return user1.age - user2.age;
-})
-
+console.log(getArrayOfNotUniqueNumbers([1,2,3,1,5,6,1,2,5]));
